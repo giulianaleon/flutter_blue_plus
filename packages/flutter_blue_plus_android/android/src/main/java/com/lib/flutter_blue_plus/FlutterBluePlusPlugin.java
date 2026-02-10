@@ -230,8 +230,6 @@ public class FlutterBluePlusPlugin implements
             }
         }
 
-        disconnectAllDevices("onDetachedFromEngine");
-
         context.unregisterReceiver(mBluetoothBondStateReceiver);
         context.unregisterReceiver(mBluetoothPairRequestReceiver);
         context.unregisterReceiver(mBluetoothAdapterStateReceiver);
