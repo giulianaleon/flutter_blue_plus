@@ -215,6 +215,7 @@ public class FlutterBluePlusPlugin implements
     public void onDetachedFromEngine(@NonNull FlutterPluginBinding binding)
     {
         log(LogLevel.DEBUG, "onDetachedFromEngine");
+        log(LogLevel.ERROR, ">>> onDetachedFromEngine START <<<");
 
         invokeMethodUIThread("OnDetachedFromEngine", new HashMap<>());
 
@@ -240,6 +241,7 @@ public class FlutterBluePlusPlugin implements
 
         mBluetoothAdapter = null;
         mBluetoothManager = null;
+        log(LogLevel.ERROR, ">>> onDetachedFromEngine END <<<");
     }
 
     @Override
@@ -255,6 +257,7 @@ public class FlutterBluePlusPlugin implements
     public void onDetachedFromActivityForConfigChanges()
     {
         log(LogLevel.DEBUG, "onDetachedFromActivityForConfigChanges");
+        log(LogLevel.ERROR, ">>> onDetachedFromActivity <<<");
         onDetachedFromActivity();
     }
 
@@ -763,6 +766,7 @@ public class FlutterBluePlusPlugin implements
 
                 case "disconnect":
                 {
+                    log(LogLevel.ERROR, ">>> DISCONNECT requested from Dart - remoteId: " + call.arguments + " <<<");
                     String remoteId = (String) call.arguments;
 
                     // already disconnected?
@@ -1770,6 +1774,7 @@ public class FlutterBluePlusPlugin implements
 
     private void disconnectAllDevices(String func)
     {
+        log(LogLevel.ERROR, ">>> disconnectAllDevices CALLED - reason: " + func + " <<<"); 
         log(LogLevel.DEBUG, "disconnectAllDevices("+func+")");
 
         // merge connected & autoconnected
@@ -1960,6 +1965,7 @@ public class FlutterBluePlusPlugin implements
             // disconnect all devices
             if (adapterState == BluetoothAdapter.STATE_TURNING_OFF ||
                 adapterState == BluetoothAdapter.STATE_OFF) {
+                log(LogLevel.ERROR, ">>> Adapter turning off - calling disconnectAllDevices <<<");
                 disconnectAllDevices("adapterTurnOff");
             }
         }
